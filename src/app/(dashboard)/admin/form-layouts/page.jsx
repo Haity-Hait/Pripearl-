@@ -1,9 +1,14 @@
 "use client";
 
-import useVerifyToken from '../../VerifyToken'; // Adjust the path as necessary
+
 import React from 'react';
+
 import Grid from '@mui/material/Grid';
+
+import useVerifyToken from '../../VerifyToken'; 
+
 import FormLayoutsBasic from '@views/form-layouts/FormLayoutsBasic';
+
 console.log('useVerifyToken:', useVerifyToken);
 
 const FormLayouts = () => {

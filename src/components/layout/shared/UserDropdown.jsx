@@ -19,6 +19,7 @@ import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import MenuItem from '@mui/material/MenuItem'
 import Button from '@mui/material/Button'
+import useVerifyToken from '@/app/(dashboard)/VerifyToken'
 
 // Styled component for badge content
 const BadgeContentSpan = styled('span')({
@@ -60,6 +61,10 @@ const UserDropdown = () => {
     localStorage.removeItem("token");
     router.push("/admin/login");
   }
+
+  const { verifyData, expired, LogOut } = useVerifyToken();
+
+
   return (
     <>
       <Badge
@@ -99,9 +104,9 @@ const UserDropdown = () => {
                     <Avatar alt='John Doe' src='/images/avatars/1.png' />
                     <div className='flex items-start flex-col'>
                       <Typography className='font-medium' color='text.primary'>
-                        John Doe
+                        {verifyData.lastName + " " + verifyData.firstName }
                       </Typography>
-                      <Typography variant='caption'>Admin</Typography>
+                      <Typography variant='caption' style={{textTransform: "capitalize"}}>{verifyData.role}</Typography>
                     </div>
                   </div>
                   <Divider className='mlb-1' />

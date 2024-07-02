@@ -32,6 +32,7 @@ const FormLayoutsBasic = () => {
   const handleImageChange = (e) => {
     if (e.target.files.length + images.length > 3) {
       toast.info('You can only upload up to 3 images')
+
       return
     }
 
@@ -43,6 +44,7 @@ const FormLayoutsBasic = () => {
   }
 
   const convertToBase64 = (file) => {
+
     return new Promise((resolve, reject) => {
       const reader = new FileReader()
       reader.readAsDataURL(file)
@@ -52,7 +54,9 @@ const FormLayoutsBasic = () => {
   }
 
   const handleSubmit = async (e) => {
+    
     e.preventDefault()
+
     setLoading(true)
     if (images.length !== 3) {
       toast.info('Please upload exactly 3 images')
@@ -78,10 +82,13 @@ const FormLayoutsBasic = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+       
         body: JSON.stringify(formData),
       })
 
+      
       const data = await response.json()
+      
       if (data.status) {
         toast.success(data.message)
         setLoading(false)

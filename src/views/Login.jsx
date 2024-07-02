@@ -18,18 +18,24 @@ import Checkbox from '@mui/material/Checkbox'
 import Button from '@mui/material/Button'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Divider from '@mui/material/Divider'
+
 import { InfinitySpin } from 'react-loader-spinner'
+
 // Component Imports
+import { ToastContainer, toast } from 'react-toastify';
+
+import axios from 'axios'
+
 import Logo from '@components/layout/shared/Logo'
 import Illustrations from '@components/Illustrations'
 
 // Config Imports
 import themeConfig from '@configs/themeConfig'
-import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
+
 // Hook Imports
 import { useImageVariant } from '@core/hooks/useImageVariant'
-import axios from 'axios'
 
 const Login = ({ mode }) => {
   // States
@@ -47,7 +53,9 @@ const Login = ({ mode }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const handleSubmit = (e) => {
+    
     e.preventDefault()
+
     setLoading(true)
     let data = { email, password }
     try {

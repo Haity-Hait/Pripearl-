@@ -1,8 +1,11 @@
 "use client";
 
+import React from 'react';
+
 import useVerifyToken from '../../VerifyToken';
-import Table from '@/views/dashboard/Table'
-import React from 'react'
+
+import Table from '@/views/dashboard/Table';
+
 
 const page = () => {
   const { verifyData, expired, LogOut } = useVerifyToken();

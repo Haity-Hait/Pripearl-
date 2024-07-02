@@ -48,6 +48,7 @@ export const menuButtonStyles = (props) => {
 const MenuButton = ({ className, children, href, ...rest }, ref) => {
   if (!href) {
     console.error('MenuButton requires a valid href prop');
+    
     return null;
   }
 

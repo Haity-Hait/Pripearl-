@@ -48,8 +48,10 @@ const VerticalMenu = ({ scrollMenu }) => {
       {/* Vertical Menu */}
       <Menu
         menuItemStyles={menuItemStyles(theme)}
+
         // renderExpandIcon={({ open }) => <RenderExpandIcon open={open} transitionDuration={transitionDuration} />}
         renderExpandedMenuItemIcon={{ icon: <i className='ri-circle-line' /> }}
+        
       // menuSectionStyles={menuSectionStyles(theme)}
       >
         <SubMenu

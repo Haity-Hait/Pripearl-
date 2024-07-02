@@ -1,8 +1,10 @@
 "use client";
 
-import useVerifyToken from '../../VerifyToken'
 // Next Imports
 import dynamic from 'next/dynamic'
+
+import useVerifyToken from '../../VerifyToken'
+
 
 // Component Imports
 import AccountSettings from '@views/account-settings'

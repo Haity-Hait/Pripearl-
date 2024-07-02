@@ -1,10 +1,12 @@
 "use client";
 
-import useVerifyToken from '../../VerifyToken'
+
 // MUI Imports
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
+
+import useVerifyToken from '../../VerifyToken'
 
 // Components Imports
 import CardInfluencingInfluencerWithImg from '@views/card-basic/CardInfluencingInfluencerWithImg'

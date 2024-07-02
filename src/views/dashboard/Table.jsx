@@ -8,13 +8,16 @@ import Chip from '@mui/material/Chip'
 // Third-party Imports
 import classnames from 'classnames'
 
+import { Button } from '@mui/material';
+
 // Components Imports
 import CustomAvatar from '@core/components/mui/Avatar'
 
 // Styles Imports
 import tableStyles from '@core/styles/table.module.css'
+
 import useVerifyToken from '@/app/(dashboard)/VerifyToken';
-import { Button } from '@mui/material';
+
 
 // Vars
 
@@ -22,6 +25,7 @@ import { Button } from '@mui/material';
 
 const Table = () => {
   const { products } = useVerifyToken()
+  
   return (
     <Card>
       <div className='overflow-x-auto'>

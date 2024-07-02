@@ -1,11 +1,11 @@
 "use client";
 
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 const useVerifyToken = () => {
   const [expired, setExpired] = useState(false);
-  const [verifyData, setVerifyData] = useState([]);
+  const [verifyData, setVerifyData] = useState();
   const [products, setProducts] = useState([]);
 
   const navigate = useRouter();
@@ -14,21 +14,25 @@ const useVerifyToken = () => {
     localStorage.removeItem("token");
     navigate.push("/admin/login");
   };
+  
   const fetchData = async () => {
     try {
+      
       const response = await axios.get("https://pripeals-backend.onrender.com/getall-product");
+      
       setProducts(response.data.data);
-      console.log(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+  
   useEffect(() => {
     const verifyToken = async () => {
       try {
         const token = localStorage.getItem("token");
         if (!token) {
           LogOut();
+
           return;
         }
 
