@@ -52,13 +52,17 @@ const Login = ({ mode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  
   const handleSubmit = (e) => {
-    
+
     e.preventDefault()
 
     setLoading(true)
+    
     let data = { email, password }
+    
     try {
+      
       axios.post("https://pripeals-backend.onrender.com/login", data)
       .then((res) => {
         localStorage.setItem('token', res.data.token)

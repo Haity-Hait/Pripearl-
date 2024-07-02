@@ -7,7 +7,8 @@ import useVerifyToken from '../../VerifyToken';
 import Table from '@/views/dashboard/Table';
 
 
-const page = () => {
+const Page = () => {
+
   const { verifyData, expired, LogOut } = useVerifyToken();
 
  
@@ -22,4 +23,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

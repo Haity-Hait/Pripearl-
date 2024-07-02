@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+
 import { useRouter } from "next/navigation";
+
 import axios from "axios";
+
 const useVerifyToken = () => {
   const [expired, setExpired] = useState(false);
   const [verifyData, setVerifyData] = useState();
@@ -27,10 +30,13 @@ const useVerifyToken = () => {
   };
   
   useEffect(() => {
+   
     const verifyToken = async () => {
       try {
         const token = localStorage.getItem("token");
+        
         if (!token) {
+          
           LogOut();
 
           return;
@@ -42,8 +48,11 @@ const useVerifyToken = () => {
             "Content-Type": "application/json",
           },
         });
+        
         console.log("response " + response);
+        
         const gg = response.data.data;
+        
         if (response.data && gg) {
           setVerifyData(gg);
           setExpired(false);
@@ -52,7 +61,9 @@ const useVerifyToken = () => {
       } catch (error) {
         if (error.response && error.response.data) {
           const tokenExpire = error.response?.data?.message;
+          
           setExpired(tokenExpire);
+          
           LogOut();
         }
       }
