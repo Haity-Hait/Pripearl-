@@ -1,6 +1,8 @@
-import { Button } from '@mui/material'
-import Link from 'next/link'
 import React from 'react'
+
+import Link from 'next/link'
+
+import { Button } from '@mui/material'
 
 const page = () => {
   return (
