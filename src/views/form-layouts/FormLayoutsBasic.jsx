@@ -17,19 +17,24 @@ import CardContent from '@mui/material/CardContent'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import DeleteIcon from '@mui/icons-material/Delete'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ThreeCircles } from 'react-loader-spinner'
 
 const FormLayoutsBasic = () => {
   // States
   const [productName, setProductName] = useState('')
+  const [loading, setLoading] = useState(false)
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([])
 
   const handleImageChange = (e) => {
     if (e.target.files.length + images.length > 3) {
-      alert('You can only upload up to 3 images')
+      toast.info('You can only upload up to 3 images')
       return
     }
+
     setImages(prevImages => [...prevImages, ...Array.from(e.target.files)])
   }
 
@@ -37,26 +42,76 @@ const FormLayoutsBasic = () => {
     setImages(prevImages => prevImages.filter((_, i) => i !== index))
   }
 
-  const handleSubmit = (e) => {
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = (error) => reject(error)
+    })
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
+    if (images.length !== 3) {
+      toast.info('Please upload exactly 3 images')
+      setLoading(false)
+
+      return
+    }
+
+    const base64Images = await Promise.all(images.map(image => convertToBase64(image)))
+
     const formData = {
       productName,
       price,
       description,
-      images
+      image1: base64Images[0],
+      image2: base64Images[1],
+      image3: base64Images[2],
     }
-    console.log(formData)
+
+    try {
+      const response = await fetch('https://pripeals-backend.onrender.com/create-product', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+      if (data.status) {
+        toast.success(data.message)
+        setLoading(false)
+        setProductName("")
+        setPrice("")
+        setDescription("")
+        setImages([])
+      } else {
+        toast.error(`${data.message}`)
+        setLoading(false)
+      }
+    } catch (error) {
+      console.error('Error creating product:', error)
+      toast.error('Error creating product')
+      setLoading(false)
+
+    }
   }
+
   const selectImage = (e) => {
     e.preventDefault()
     document.querySelector('input[type="file"]').click()
-
   }
+
   return (
     <Card>
+      <ToastContainer />
       <CardHeader title='Post a Product' />
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit}>
           <Grid container spacing={5}>
             <Grid item xs={12}>
               <TextField
@@ -77,7 +132,7 @@ const FormLayoutsBasic = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button onClick={(e) => selectImage(e)} variant='contained' type='submit'>
+              <Button onClick={selectImage} variant='contained'>
                 Select Images
               </Button>
               <input
@@ -121,8 +176,17 @@ const FormLayoutsBasic = () => {
             </Grid>
             <Grid item xs={12}>
               <div className='flex items-center justify-between flex-wrap gap-5'>
-                <Button variant='contained' onClick={handleSubmit} type='submit'>
-                  Create Product
+                <Button variant='contained' type='submit'>
+                  {loading ? <ThreeCircles
+                    visible={true}
+                    height="30"
+                    width="100"
+                    color="#fff"
+                    ariaLabel="three-circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                  />
+                    : "Create Product"}
                 </Button>
               </div>
             </Grid>

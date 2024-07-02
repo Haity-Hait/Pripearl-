@@ -1,3 +1,6 @@
+"use client";
+
+import useVerifyToken from '../../VerifyToken'
 // Next Imports
 import dynamic from 'next/dynamic'
 
@@ -16,6 +19,22 @@ const tabContentList = () => ({
 })
 
 const AccountSettingsPage = () => {
+  const { verifyData, expired, LogOut } = useVerifyToken();
+
+  console.log('useVerifyToken:', useVerifyToken); // Debugging to ensure the hook is imported correctly
+  console.log('verifyData:', verifyData); // Debugging to check data
+  console.log('expired:', expired); // Debugging to check expired state
+
+  if (expired) {
+    return (
+      <div>
+        You are currently logged out. Please
+        <button style={{ textDecoration: "underline" }} onClick={LogOut}>Log in</button>
+        back to continue your adventure.
+      </div>
+    );
+  }
+
   return <AccountSettings tabContentList={tabContentList()} />
 }
 

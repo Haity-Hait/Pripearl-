@@ -1,25 +1,27 @@
-// MUI Imports
-import Grid from '@mui/material/Grid'
+"use client";
 
-// Component Imports
-import FormLayoutsBasic from '@views/form-layouts/FormLayoutsBasic'
-import FormLayoutsIcon from '@views/form-layouts/FormLayoutsIcons'
-import FormLayoutsAlignment from '@views/form-layouts/FormLayoutsAlignment'
+import useVerifyToken from '../../VerifyToken'; // Adjust the path as necessary
+import React from 'react';
+import Grid from '@mui/material/Grid';
+import FormLayoutsBasic from '@views/form-layouts/FormLayoutsBasic';
+console.log('useVerifyToken:', useVerifyToken);
 
 const FormLayouts = () => {
+  const { verifyData, expired, LogOut } = useVerifyToken();
+
+  
+
+  if (expired) {
+    return <div>You are currently logged out. Please <button onClick={LogOut}>log in</button>.</div>;
+  }
+
   return (
     <Grid container spacing={6}>
       <Grid item xs={12} md={6}>
         <FormLayoutsBasic />
       </Grid>
-      {/* <Grid item xs={12} md={6}>
-        <FormLayoutsIcon />
-      </Grid>
-      <Grid item xs={12}>
-        <FormLayoutsAlignment />
-      </Grid> */}
     </Grid>
-  )
-}
+  );
+};
 
-export default FormLayouts
+export default FormLayouts;

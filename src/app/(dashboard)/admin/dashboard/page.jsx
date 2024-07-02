@@ -1,19 +1,30 @@
+"use client";
+
 // MUI Imports
-import Grid from '@mui/material/Grid'
+import Grid from '@mui/material/Grid';
 
 // Components Imports
-import Award from '@views/dashboard/Award'
-import Transactions from '@views/dashboard/Transactions'
-import WeeklyOverview from '@views/dashboard/WeeklyOverview'
-import TotalEarning from '@views/dashboard/TotalEarning'
-import LineChart from '@views/dashboard/LineChart'
-import DistributedColumnChart from '@views/dashboard/DistributedColumnChart'
-import DepositWithdraw from '@views/dashboard/DepositWithdraw'
-import SalesByCountries from '@views/dashboard/SalesByCountries'
-import CardStatVertical from '@components/card-statistics/Vertical'
-import Table from '@views/dashboard/Table'
+import Award from '@views/dashboard/Award';
+import Transactions from '@views/dashboard/Transactions';
+import WeeklyOverview from '@views/dashboard/WeeklyOverview';
+import TotalEarning from '@views/dashboard/TotalEarning';
+import LineChart from '@views/dashboard/LineChart';
+import DistributedColumnChart from '@views/dashboard/DistributedColumnChart';
+import DepositWithdraw from '@views/dashboard/DepositWithdraw';
+import SalesByCountries from '@views/dashboard/SalesByCountries';
+import CardStatVertical from '@components/card-statistics/Vertical';
+import Table from '@views/dashboard/Table';
+import useVerifyToken from '../../VerifyToken';
 
 const DashboardAnalytics = () => {
+  const { verifyData, expired, LogOut } = useVerifyToken();
+
+ 
+
+  if (expired) {
+    return <div>You are currently logged out. Please <button style={{ textDecoration: "underline" }} onClick={LogOut}>Log in</button> back to continue your adventure.</div>;
+  }
+
   return (
     <Grid container spacing={6}>
       <Grid item xs={12} md={4}>
@@ -70,7 +81,7 @@ const DashboardAnalytics = () => {
         <Table />
       </Grid>
     </Grid>
-  )
-}
+  );
+};
 
-export default DashboardAnalytics
+export default DashboardAnalytics;

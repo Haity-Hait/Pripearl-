@@ -1,3 +1,4 @@
+
 // Layout Imports
 import LayoutWrapper from '@layouts/LayoutWrapper'
 import VerticalLayout from '@layouts/VerticalLayout'
@@ -10,6 +11,7 @@ import Navbar from '@components/layout/vertical/Navbar'
 const Layout = async ({ children }) => {
   // Vars
   const direction = 'ltr'
+
 
   return (
     <Providers direction={direction}>

@@ -1,3 +1,6 @@
+"use client";
+
+import useVerifyToken from '../../VerifyToken'
 // MUI Imports
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
@@ -21,6 +24,14 @@ import CardFacebook from '@views/card-basic/CardFacebook'
 import CardLinkedIn from '@views/card-basic/CardLinkedIn'
 
 const CardBasic = () => {
+  const { verifyData, expired, LogOut } = useVerifyToken();
+
+ 
+
+  if (expired) {
+    return <div>You are currently logged out. Please <button style={{ textDecoration: "underline" }} onClick={LogOut}>Log in</button> back to continue your adventure.</div>;
+  }
+
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
