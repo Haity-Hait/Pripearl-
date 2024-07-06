@@ -17,26 +17,27 @@ const useVerifyToken = () => {
     localStorage.removeItem("token");
     navigate.push("/admin/login");
   };
-  
+
   const fetchData = async () => {
     try {
-      
+
       const response = await axios.get("https://pripeals-backend.onrender.com/getall-product");
-      
+
       setProducts(response.data.data);
+      console.log(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  
+
   useEffect(() => {
-   
+
     const verifyToken = async () => {
       try {
         const token = localStorage.getItem("token");
-        
+
         if (!token) {
-          
+
           LogOut();
 
           return;
@@ -48,11 +49,11 @@ const useVerifyToken = () => {
             "Content-Type": "application/json",
           },
         });
-        
+
         console.log("response " + response);
-        
+
         const gg = response.data.data;
-        
+
         if (response.data && gg) {
           setVerifyData(gg);
           setExpired(false);
@@ -61,9 +62,9 @@ const useVerifyToken = () => {
       } catch (error) {
         if (error.response && error.response.data) {
           const tokenExpire = error.response?.data?.message;
-          
+
           setExpired(tokenExpire);
-          
+
           LogOut();
         }
       }

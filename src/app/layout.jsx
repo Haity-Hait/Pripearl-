@@ -7,6 +7,8 @@ import '@/app/globals.css'
 // Generated Icon CSS Imports
 import '@assets/iconify-icons/generated-icons.css'
 
+import '@fontsource/uncial-antiqua';
+
 export const metadata = {
   title: 'Pripearl Beads',
   description:
