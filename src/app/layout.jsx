@@ -7,7 +7,7 @@ import '@/app/globals.css'
 // Generated Icon CSS Imports
 import '@assets/iconify-icons/generated-icons.css'
 
-import '@fontsource/uncial-antiqua';
+import '@fontsource/poppins'; import '@fontsource/poppins';
 
 export const metadata = {
   title: 'Pripearl Beads',
@@ -21,7 +21,7 @@ const RootLayout = ({ children }) => {
 
   return (
     <html id='__next' dir={direction}>
-      <body className='flex is-full min-bs-full flex-auto flex-col'>{children}</body>
+      <body className='flex is-full min-bs-full flex-auto flex-col' style={{ fontFamily: "Poppins, sans-serif" }}>{children}</body>
     </html>
   )
 }

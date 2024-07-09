@@ -115,3 +115,50 @@ role: 'Subscriber',
 status: 'active'
 }
 ]
+
+
+const products = [
+  {
+    id: 1,
+    image: 'https://ng.jumia.is/unsafe/fit-in/300x300/filters:fill(white)/product/78/3235042/1.jpg?4060',
+    name: 'Loro Piana',
+    description: 'Slim Fit Striped Silk and Linen-Blend Polo Shirt',
+    price: 45,
+  },
+  {
+    id: 2,
+    image: 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+    name: 'White Pants',
+    description: 'Slim Fit man pants',
+    price: 90,
+  },
+  {
+    id: 3,
+    image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+    name: 'Bidha Glasses',
+    description: 'Black Glasses with luxury finishing',
+    price: 50,
+  },
+  {
+    id: 4,
+    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+    name: 'Brown Bomber',
+    description: 'Luxury unisex bomber jacket',
+    price: 52,
+  },
+  {
+    id: 5,
+    image: "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
+    name: 'Leather Shoes Jack',
+    description: 'Man leather shoes',
+    price: 89,
+  },
+  {
+    id: 6,
+    image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+    name: 'Grey Tshirt',
+    description: 'Unisex grey tshirt',
+    price: 21,
+  },
+];
+

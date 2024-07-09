@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 const CartDrawer = ({ open, onClose, cartItems }) => {
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
-      <Box sx={{ width: 250, padding: 2 }}>
+      <Box sx={{ width: 300, padding: 2 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h6">Your Cart</Typography>
           <IconButton onClick={onClose}>
@@ -25,9 +25,9 @@ const CartDrawer = ({ open, onClose, cartItems }) => {
           {cartItems.map((item, index) => (
             <ListItem key={index}>
               <ListItemAvatar>
-                <Avatar src={item.image} />
+                <Avatar src={item.images[0].image1.secure_url} />
               </ListItemAvatar>
-              <ListItemText primary={item.name} secondary={`Price: ${item.price}`} />
+              <ListItemText primary={item.productName} secondary={`Price:  ₦${item.price}.00`} />
             </ListItem>
           ))}
         </List>

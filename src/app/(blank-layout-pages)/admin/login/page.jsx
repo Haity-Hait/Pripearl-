@@ -1,14 +1,33 @@
-// Component Imports
-import Login from '@views/Login'
+"use client";
 
-// Server Action Imports
-import { getServerMode } from '@core/utils/serverHelpers'
+import React, { useEffect, useState } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+import Login from '@views/Login';
 
 const LoginPage = () => {
-  // Vars
-  const mode = getServerMode()
+  const [mode, setMode] = useState(null);
+  const router = useRouter();
 
-  return <Login mode={mode} />
-}
+  useEffect(() => {
+    const fetchMode = async () => {
+      const response = await fetch('/api/get-mode');
+      const data = await response.json();
 
-export default LoginPage
+      setMode(data.mode);
+    };
+
+    fetchMode();
+
+    // if (localStorage.getItem("token")) {
+    //   router.push("/admin/dashboard");
+    // }
+  }, [router]);
+
+  // if (mode === null) return <div>Loading...</div>;
+
+  return <Login mode={mode} />;
+};
+
+export default LoginPage;

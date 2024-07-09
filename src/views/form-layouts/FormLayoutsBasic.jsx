@@ -17,17 +17,25 @@ import CardContent from '@mui/material/CardContent'
 import IconButton from '@mui/material/IconButton'
 import InputAdornment from '@mui/material/InputAdornment'
 import DeleteIcon from '@mui/icons-material/Delete'
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import { ThreeCircles } from 'react-loader-spinner'
+
+import useVerifyToken from '@/app/(dashboard)/VerifyToken'
+import SelectableInput from '@/app/__component/SelectableInput'
 
 const FormLayoutsBasic = () => {
   // States
   const [productName, setProductName] = useState('')
   const [loading, setLoading] = useState(false)
   const [price, setPrice] = useState('')
+  const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
   const [images, setImages] = useState([])
+
+  const { verifyData } = useVerifyToken()
 
   const handleImageChange = (e) => {
     if (e.target.files.length + images.length > 3) {
@@ -47,7 +55,7 @@ const FormLayoutsBasic = () => {
 
     return new Promise((resolve, reject) => {
       const reader = new FileReader()
-      
+
       reader.readAsDataURL(file)
       reader.onload = () => resolve(reader.result)
       reader.onerror = (error) => reject(error)
@@ -55,11 +63,11 @@ const FormLayoutsBasic = () => {
   }
 
   const handleSubmit = async (e) => {
-    
+
     e.preventDefault()
 
     setLoading(true)
-    
+
     if (images.length !== 3) {
       toast.info('Please upload exactly 3 images')
       setLoading(false)
@@ -70,13 +78,17 @@ const FormLayoutsBasic = () => {
     const base64Images = await Promise.all(images.map(image => convertToBase64(image)))
 
     const formData = {
+      admin: verifyData.email,
       productName,
       price,
       description,
+      category,
       image1: base64Images[0],
       image2: base64Images[1],
       image3: base64Images[2],
     }
+
+    console.log(formData);
 
     try {
       const response = await fetch('https://pripeals-backend.onrender.com/create-product', {
@@ -84,13 +96,13 @@ const FormLayoutsBasic = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-       
+
         body: JSON.stringify(formData),
       })
 
-      
+
       const data = await response.json()
-      
+
       if (data.status) {
         toast.success(data.message)
         setLoading(false)
@@ -114,6 +126,11 @@ const FormLayoutsBasic = () => {
     e.preventDefault()
     document.querySelector('input[type="file"]').click()
   }
+
+  const options = [
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
+  ];
 
   return (
     <Card>
@@ -139,6 +156,9 @@ const FormLayoutsBasic = () => {
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
+            </Grid>
+            <Grid item xs={12}>
+              <SelectableInput onChange={(e) => setCategory(e.target.value)} options={options} />
             </Grid>
             <Grid item xs={12}>
               <Button onClick={selectImage} variant='contained'>

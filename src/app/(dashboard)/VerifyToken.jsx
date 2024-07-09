@@ -1,80 +1,88 @@
 "use client";
 
+
 import React, { useEffect, useState } from "react";
 
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import axios from "axios";
 
 const useVerifyToken = () => {
   const [expired, setExpired] = useState(false);
-  const [verifyData, setVerifyData] = useState();
+  const [email, setEmail] = useState("");
+  const [verifyData, setVerifyData] = useState(null);
   const [products, setProducts] = useState([]);
-
   const navigate = useRouter();
+  const pathname = usePathname(); // Get the current pathname
 
-  const LogOut = () => {
+  // Function to log out the user
+  const logOut = () => {
     localStorage.removeItem("token");
-    navigate.push("/admin/login");
+
+    // Only redirect to login if the user is not on the '/' page
+
+    if (pathname !== '/') {
+      navigate.push("/admin/login");
+    }
   };
+
+  // Function to verify the token
+  const verifyToken = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        logOut();
+
+        return;
+      }
+
+      const response = await axios.get("https://pripeals-backend.onrender.com/verify-token", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const verificationData = response.data.data;
+
+      if (response.data && verificationData) {
+        setVerifyData(verificationData);
+        setEmail(verificationData.email);
+        setExpired(false);
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setExpired(error.response.data.message);
+        logOut();
+      }
+    }
+  };
+
+  const userEmail = "prinpearlsbeads@gmail.com"
 
   const fetchData = async () => {
     try {
+      if (userEmail) {
+        const response = await axios.get(`https://pripeals-backend.onrender.com/getall-product/${userEmail}`);
 
-      const response = await axios.get("https://pripeals-backend.onrender.com/getall-product");
-
-      setProducts(response.data.data);
-      console.log(response.data.data);
+        setProducts(response.data.data);
+        console.log(response.data.data);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-
-    const verifyToken = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-
-          LogOut();
-
-          return;
-        }
-
-        const response = await axios.get("https://pripeals-backend.onrender.com/verify-token", {
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-        });
-
-        console.log("response " + response);
-
-        const gg = response.data.data;
-
-        if (response.data && gg) {
-          setVerifyData(gg);
-          setExpired(false);
-
-        }
-      } catch (error) {
-        if (error.response && error.response.data) {
-          const tokenExpire = error.response?.data?.message;
-
-          setExpired(tokenExpire);
-
-          LogOut();
-        }
-      }
-    };
-
-    fetchData()
     verifyToken();
   }, []);
 
-  return { verifyData, expired, LogOut, products };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return { verifyData, expired, logOut, products };
 };
 
 export default useVerifyToken;

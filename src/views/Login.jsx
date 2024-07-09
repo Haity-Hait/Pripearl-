@@ -38,6 +38,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useImageVariant } from '@core/hooks/useImageVariant'
 
 const Login = ({ mode }) => {
+
   // States
   const [isPasswordShown, setIsPasswordShown] = useState(false)
 
@@ -52,27 +53,29 @@ const Login = ({ mode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
+
+
   const handleSubmit = (e) => {
 
     e.preventDefault()
 
     setLoading(true)
-    
+
     let data = { email, password }
-    
+
     try {
-      
+
       axios.post("https://pripeals-backend.onrender.com/login", data)
-      .then((res) => {
-        localStorage.setItem('token', res.data.token)
-        toast.success(res.data.message);
-        router.push('/admin/dashboard')
-        setLoading(false)
-      }).catch((err) => {
-        toast.error(err.response.data.message);
-        setLoading(false)
-      })
+        .then((res) => {
+          localStorage.setItem('token', res.data.token)
+          toast.success(res.data.message);
+          router.push('/admin/dashboard')
+          setLoading(false)
+        }).catch((err) => {
+          toast.error(err.response.data.message);
+          setLoading(false)
+        })
     } catch (error) {
       console.log(error);
     }

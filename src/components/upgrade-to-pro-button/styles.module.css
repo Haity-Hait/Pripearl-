@@ -12,6 +12,7 @@
   justify-content: center;
   box-sizing: border-box;
   outline: 0px;
+  /* color: #222222d0; */
   border: 0px;
   margin: 0px;
   cursor: pointer;
@@ -35,6 +36,7 @@
 
 .button {
   position: relative;
+
   &:hover {
     color: white;
     text-decoration: none;
@@ -48,6 +50,7 @@
     opacity: 0;
     transition: opacity 200ms ease-in-out;
   }
+
   &:not(:hover) .buttonInner {
     opacity: 0.8;
   }
@@ -57,9 +60,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
