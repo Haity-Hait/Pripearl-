@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { useState, useEffect } from 'react';
 
 import AppBar from '@mui/material/AppBar';
@@ -24,6 +23,7 @@ import useVerifyToken from '../(dashboard)/VerifyToken';
 const Nav = () => {
   const { products } = useVerifyToken();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [subTotal, setSubtotal] = useState();
   const [cartItemsCount, setCartItemsCount] = useState(0);
   const [cartItems, setCartItems] = useState([]);
   const theme = useTheme();
@@ -31,24 +31,26 @@ const Nav = () => {
 
   useEffect(() => {
     const updateCartItems = () => {
-
       const cartIDs = JSON.parse(localStorage.getItem("pripearl_cart")) || [];
+      
       const filteredItems = products.filter(product => cartIDs.includes(product._id));
+      
+      console.log(filteredItems);
 
-      console.log("filtered " + filteredItems);
 
       setCartItems(filteredItems);
-
       setCartItemsCount(cartIDs.length);
+
+      // Calculate the subtotal
+      const subtotal = filteredItems.reduce((acc, item) => acc + item.price, 0);
+      
+      setSubtotal(subtotal);
     };
 
-    // Initial count setup
     updateCartItems();
 
-    // Event listener for cart updates
     window.addEventListener("cartUpdated", updateCartItems);
 
-    // Clean up event listener on component unmount
     return () => {
       window.removeEventListener("cartUpdated", updateCartItems);
     };
@@ -60,6 +62,24 @@ const Nav = () => {
 
   const handleCartClose = () => {
     setDrawerOpen(false);
+  };
+
+  const handleItemDelete = (index) => {
+    const cartIDs = JSON.parse(localStorage.getItem("pripearl_cart")) || [];
+    const updatedCartIDs = cartIDs.filter((id, i) => i !== index);
+
+    localStorage.setItem("pripearl_cart", JSON.stringify(updatedCartIDs));
+
+    const updatedCartItems = cartItems.filter((item, i) => i !== index);
+
+    setCartItems(updatedCartItems);
+    setCartItemsCount(updatedCartIDs.length);
+
+    const event = new Event('cartUpdated');
+    
+    window.dispatchEvent(event);
+    
+    window.location.reload()
   };
 
   return (
@@ -76,7 +96,6 @@ const Nav = () => {
               Pripearl
             </Typography>
           </Box>
-          {/* Cart Icon with Badge */}
           <IconButton color="inherit" aria-label="cart" onClick={handleCartOpen}>
             <Badge badgeContent={cartItemsCount} color="secondary">
               <LocalMallOutlinedIcon sx={{ color: '#000' }} />
@@ -84,7 +103,7 @@ const Nav = () => {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <CartDrawer open={drawerOpen} cartItems={cartItems} onClose={handleCartClose} />
+      <CartDrawer open={drawerOpen} cartItems={cartItems} subtotal={subTotal} handleDelete={handleItemDelete} onClose={handleCartClose} />
     </>
   );
 };
