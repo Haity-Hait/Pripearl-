@@ -2,11 +2,11 @@
 import ForgotPassword from '@views/ForgotPassword'
 
 // Server Action Imports
-import { getServerMode } from '@core/utils/serverHelpers'
+import { getMode } from '@core/utils/serverHelpers'
 
 const ForgotPasswordPage = () => {
   // Vars
-  const mode = getServerMode()
+  const mode = getMode()
 
   return <ForgotPassword mode={mode} />
 }

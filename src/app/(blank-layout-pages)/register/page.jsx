@@ -2,11 +2,11 @@
 import Register from '@views/Register'
 
 // Server Action Imports
-import { getServerMode } from '@core/utils/serverHelpers'
+import { getMode } from '@core/utils/serverHelpers'
 
 const RegisterPage = () => {
   // Vars
-  const mode = getServerMode()
+  const mode = getMode()
 
   return <Register mode={mode} />
 }
