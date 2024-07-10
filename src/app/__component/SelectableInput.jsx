@@ -23,7 +23,7 @@ const SelectableInput = ({ options, onChange }) => {
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <TextField
         select
-        label="Select an option"
+        label="Category"
         value={value}
         onChange={handleChange}
         style={{ flexGrow: 1 }}
