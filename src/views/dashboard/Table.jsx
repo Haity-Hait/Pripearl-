@@ -1,35 +1,23 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-
-// MUI Imports
 import { Typography, Card, Button } from '@mui/material';
-
 import Chip from '@mui/material/Chip';
-
-// Third-party Imports
 import classnames from 'classnames';
-
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
-
-// Components Imports
 import CustomAvatar from '@core/components/mui/Avatar';
-
-// Styles Imports
 import tableStyles from '@core/styles/table.module.css';
-
-// Hooks Imports
 import useVerifyToken from '@/app/(dashboard)/VerifyToken';
-
-// React Imports
-
+import TruncatedText from '@/app/__component/TruncateText';
+import EditProductModal from '@/app/__component/EditProductModal';
 
 const Table = () => {
   const { products: initialProducts, verifyData } = useVerifyToken();
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     setProducts(initialProducts);
@@ -41,14 +29,31 @@ const Table = () => {
         toast.success(res.data.message);
         setProducts(products.filter(product => product._id !== id));
       })
-
       .catch((err) => {
         toast.error(err.response.data.message);
       });
   }
 
-  const editProduct = (id) => {
-    console.log(id);
+  const editProduct = (product) => {
+    setSelectedProduct(product);
+    setIsEditModalOpen(true);
+  }
+
+  const onCloseEditModal = () => {
+    setSelectedProduct(null);
+    setIsEditModalOpen(false);
+  }
+
+  const handleSaveProduct = (updatedProduct) => {
+    axios.patch("https://pripeals-backend.onrender.com/edit-product", { update: { ...updatedProduct }, id: updatedProduct._id })
+      .then((res) => {
+        toast.success(res.data.message);
+        setProducts(products.map(product => product._id === updatedProduct._id ? updatedProduct : product));
+        setIsEditModalOpen(false);
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
   }
 
   return (
@@ -68,7 +73,7 @@ const Table = () => {
             <tbody>
               {products
                 .sort((a, b) => b.productName.localeCompare(a.productName))
-                .map((row, index) => (
+                .map((row) => (
                   <tr key={row._id}>
                     <td className='!plb-1'>
                       <div className='flex items-center gap-3'>
@@ -81,7 +86,7 @@ const Table = () => {
                       </div>
                     </td>
                     <td className='!plb-1'>
-                      <Typography>{row.description}</Typography>
+                      <TruncatedText wordLimit={10} text={row.description} />
                     </td>
                     <td className='!plb-1'>
                       <div className='flex gap-2'>
@@ -90,7 +95,7 @@ const Table = () => {
                     </td>
                     <td className='!pb-1'>
                       <Button
-                        onClick={() => editProduct(row._id)}
+                        onClick={() => editProduct(row)}
                         variant="contained"
                         sx={{
                           backgroundColor: '#FFEB3B',
@@ -120,6 +125,14 @@ const Table = () => {
           )}
         </table>
       </div>
+      {selectedProduct && (
+        <EditProductModal
+          open={isEditModalOpen}
+          onClose={onCloseEditModal}
+          product={selectedProduct}
+          onSave={handleSaveProduct}
+        />
+      )}
     </Card>
   );
 }

@@ -11,32 +11,32 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const data = [
   {
-    label: 'San Francisco – Oakland Bay Bridge, United States',
+    label: 'Cutural / Tribal Beads.',
     imgPath:
       'https://images.unsplash.com/photo-1601387603639-387c75bdcb0d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmVhZHN8ZW58MHx8MHx8fDA%3D',
   },
   {
-    label: 'Bird',
+    label: 'Pearl Jewelries',
     imgPath:
       'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGpld2Vscmllc3xlbnwwfHwwfHx8MA%3D%3D',
   },
   {
-    label: 'Bali, Indonesia',
+    label: 'Aesthetic Beads',
     imgPath:
       'https://images.unsplash.com/photo-1560805949-7f26c001f3f0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fGJlYWRzfGVufDB8fDB8fHww',
   },
   {
-    label: 'Goč, Serbia',
+    label: 'Baby beads',
     imgPath:
       'https://images.unsplash.com/photo-1609446154807-d56805f0e007?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmVhZHN8ZW58MHx8MHx8fDA%3D',
   },
   {
-    label: 'Philemon',
+    label: 'Ceramics Beads',
     imgPath:
       'https://images.unsplash.com/photo-1616781247622-c92e86554135?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGJlYWRzfGVufDB8fDB8fHww',
   },
   {
-    label: 'Pappy keys',
+    label: 'Waist Beads',
     imgPath:
       'https://media.istockphoto.com/id/930772422/photo/women-beads-and-necklace-in-jewerly-market-bali-island.webp?b=1&s=170667a&w=0&k=20&c=7LbBZ7u2pEtg2gSMHNQVopxcvkiwzwc1K7Jnzbw05Hw=',
   },
