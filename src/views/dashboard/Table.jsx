@@ -28,7 +28,7 @@ import useVerifyToken from '@/app/(dashboard)/VerifyToken';
 
 
 const Table = () => {
-  const { products: initialProducts } = useVerifyToken();
+  const { products: initialProducts, verifyData } = useVerifyToken();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Table = () => {
   }, [initialProducts]);
 
   const deleteProduct = (id) => {
-    axios.post("https://pripeals-backend.onrender.com/delete-product", { id })
+    axios.post("https://pripeals-backend.onrender.com/delete-product", { id, admin: verifyData.email })
       .then((res) => {
         toast.success(res.data.message);
         setProducts(products.filter(product => product._id !== id));
