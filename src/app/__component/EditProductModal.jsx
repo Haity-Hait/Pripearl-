@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+
 import {
   Dialog,
   DialogActions,
@@ -7,6 +9,7 @@ import {
   TextField,
   Button
 } from '@mui/material';
+
 import SelectableInput from './SelectableInput';
 
 const EditProductModal = ({ open, onClose, product, onSave }) => {
@@ -23,7 +26,9 @@ const EditProductModal = ({ open, onClose, product, onSave }) => {
       price,
       category
     };
+    
     console.log(updatedProduct);
+    
     onSave(updatedProduct);
   };
 
