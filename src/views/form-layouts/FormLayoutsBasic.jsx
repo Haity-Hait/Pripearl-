@@ -143,7 +143,7 @@ const FormLayoutsBasic = () => {
             <Grid item xs={12}>
               <TextField
                 fullWidth
-                label='Product Name'
+                label='Product Name*'
                 value={productName}
                 onChange={(e) => setProductName(e.target.value)}
               />
@@ -152,7 +152,7 @@ const FormLayoutsBasic = () => {
               <TextField
                 fullWidth
                 type='number'
-                label='Price'
+                label='Price*'
                 placeholder='Amount in naira'
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
@@ -163,7 +163,7 @@ const FormLayoutsBasic = () => {
             </Grid>
             <Grid item xs={12}>
               <Button onClick={selectImage} variant='contained'>
-                Select Images
+                Select Images*
               </Button>
               <input
                 accept="image/*"
