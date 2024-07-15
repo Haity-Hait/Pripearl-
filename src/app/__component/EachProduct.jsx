@@ -5,7 +5,7 @@ import { Box, Card, CardContent, CardMedia, Typography, Button } from '@mui/mate
 
 import TruncatedText from './TruncateText';
 
-const EachProduct = ({ id, image, name, description, price, category, add2Cart }) => {
+const EachProduct = ({ id, image, name, description, price, category, add2Cart, details }) => {
   return (
     <Card
       sx={{
@@ -90,7 +90,7 @@ const EachProduct = ({ id, image, name, description, price, category, add2Cart }
         >
           Add to Cart
         </Button>
-        <Button variant="outlined" color="inherit">
+        <Button onClick={() => details(id)} variant="outlined" color="inherit">
           Details
         </Button>
       </Box>

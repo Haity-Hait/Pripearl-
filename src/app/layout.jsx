@@ -7,7 +7,7 @@ import '@/app/globals.css'
 // Generated Icon CSS Imports
 import '@assets/iconify-icons/generated-icons.css'
 
-import '@fontsource/poppins'; import '@fontsource/poppins';
+import '@fontsource/poppins';
 
 export const metadata = {
   title: 'Pripearl Beads',
