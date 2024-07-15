@@ -130,6 +130,7 @@ const FormLayoutsBasic = () => {
   const options = [
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
+    { value: 'unisex', label: 'Unisex' },
   ];
 
   return (
