@@ -30,7 +30,7 @@ const Table = () => {
   }, [initialProducts]);
 
   const deleteProduct = (id) => {
-    axios.post("https://pripeals-backend.onrender.com/delete-product", { id, admin: verifyData.email })
+    axios.post("https://pripeal.affi9ja.com/delete-product", { id, admin: verifyData.email })
       .then((res) => {
         toast.success(res.data.message);
         setProducts(products.filter(product => product._id !== id));
@@ -51,7 +51,7 @@ const Table = () => {
   }
 
   const handleSaveProduct = (updatedProduct) => {
-    axios.patch("https://pripeals-backend.onrender.com/edit-product", { update: { ...updatedProduct }, id: updatedProduct._id })
+    axios.patch("https://pripeal.affi9ja.com/edit-product", { update: { ...updatedProduct }, id: updatedProduct._id })
       .then((res) => {
         toast.success(res.data.message);
         setProducts(products.map(product => product._id === updatedProduct._id ? updatedProduct : product));
@@ -92,7 +92,7 @@ const Table = () => {
                       </div>
                     </td>
                     <td className='!plb-1'>
-                      <TruncatedText wordLimit={10} text={row.description} />
+                      <TruncatedText style={{ textTransform: "capitalize" }} wordLimit={10} text={row.description} />
                     </td>
                     <td className='!plb-1'>
                       <div className='flex gap-2'>

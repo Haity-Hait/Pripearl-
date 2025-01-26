@@ -66,7 +66,7 @@ const Login = ({ mode }) => {
 
     try {
 
-      axios.post("https://pripeals-backend.onrender.com/login", data)
+      axios.post("https://pripeal.affi9ja.com/login", data)
         .then((res) => {
           localStorage.setItem('token', res.data.token)
           toast.success(res.data.message);

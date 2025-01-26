@@ -37,7 +37,7 @@ const useVerifyToken = () => {
         return;
       }
 
-      const response = await axios.get("https://pripeals-backend.onrender.com/verify-token", {
+      const response = await axios.get("https://pripeal.affi9ja.com/verify-token", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ const useVerifyToken = () => {
   const fetchData = async () => {
     try {
       if (userEmail) {
-        const response = await axios.get(`https://pripeals-backend.onrender.com/getall-product/${userEmail}`);
+        const response = await axios.get(`https://pripeal.affi9ja.com/getall-product/${userEmail}`);
 
         setProducts(response.data.data);
         console.log(response.data.data);
