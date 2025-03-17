@@ -1,3 +1,5 @@
+/* eslint-disable lines-around-comment */
+/* eslint-disable import/order */
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -29,6 +31,7 @@ const Nav = () => {
       try {
         // Safely get cart IDs from localStorage
         const cartIDs = JSON.parse(localStorage.getItem("pripearl_cart")) || [];
+
         setCartItemsCount(cartIDs.length);
 
         // Only proceed with filtering if products are available
@@ -43,6 +46,7 @@ const Nav = () => {
           const subtotal = filteredItems.reduce((acc, item) =>
             acc + (item.price || 0), 0
           );
+
           setSubtotal(subtotal);
         }
       } catch (error) {
@@ -84,6 +88,7 @@ const Nav = () => {
 
       // Update local state
       const updatedCartItems = cartItems.filter((_, i) => i !== index);
+
       setCartItems(updatedCartItems);
       setCartItemsCount(updatedCartIDs.length);
 
@@ -91,6 +96,7 @@ const Nav = () => {
       const newSubtotal = updatedCartItems.reduce((acc, item) =>
         acc + (item.price || 0), 0
       );
+
       setSubtotal(newSubtotal);
 
       // Dispatch cart update event

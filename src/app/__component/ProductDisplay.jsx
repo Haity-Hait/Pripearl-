@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+
 import {
   Grid,
   Container,
@@ -16,6 +17,7 @@ import {
   Box
 } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
+
 import EachProduct from './EachProduct';
 import 'react-toastify/dist/ReactToastify.css';
 import useVerifyToken from '../(dashboard)/VerifyToken';
@@ -32,6 +34,7 @@ const ProductDisplay = () => {
   const add2Cart = (id) => {
     if (!cart.includes(id)) {
       const newCart = [...cart, id];
+
       setCart(newCart);
       localStorage.setItem("pripearl_cart", JSON.stringify(newCart));
       toast.success("Product added to cart successfully");
@@ -59,6 +62,7 @@ const ProductDisplay = () => {
 
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("pripearl_cart") || "[]");
+
     setCart(savedCart);
   }, []);
 
