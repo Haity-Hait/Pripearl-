@@ -91,7 +91,7 @@ const FormLayoutsBasic = () => {
     console.log(formData);
 
     try {
-      const response = await fetch('https://pripeals-backend.onrender.com/create-product', {
+      const response = await fetch('https://pripeal.affi9ja.com/create-product', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

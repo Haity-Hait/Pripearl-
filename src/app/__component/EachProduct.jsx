@@ -48,7 +48,7 @@ const EachProduct = ({ id, image, name, description, price, category, add2Cart, 
         <TruncatedText
           text={description}
           wordLimit={5}
-          style={{ color: '#222222d0', fontWeight: '500', fontSize: '15px', mt: '-4px' }}
+          style={{ textTransform: "capitalize", color: '#222222d0', fontWeight: '500', fontSize: '15px', mt: '-4px' }}
         />
         <Typography variant="h6" component="p" sx={{ color: '#222', fontWeight: '600', mt: '8px' }}>
           ₦{price}
